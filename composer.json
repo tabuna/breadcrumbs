@@ -1,11 +1,19 @@
 {
-    "name": "tabuna/breadcrumbs-tabuna",
-    "description": "Breadcrumbs made easy for Laravel.",
+    "name": "tabuna/breadcrumbs",
+    "description": "An easy way to add breadcrumbs to your Laravel app.",
     "license": "MIT",
     "authors": [
         {
-            "name": "tabuna",
+            "name": "Alexandr Chernyaev",
             "email": "bliz48rus@gmail.com"
+        },
+        {
+            "name": "Dwight Watson",
+            "email": "dwight@studentservices.com.au"
+        },
+        {
+            "name": "Dave James Miller",
+            "email": "dave@davejamesmiller.com"
         }
     ],
     "require": {
