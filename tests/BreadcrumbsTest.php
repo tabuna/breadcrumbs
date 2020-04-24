@@ -49,7 +49,6 @@ class BreadcrumbsTest extends TestCase
                 $trail->push('Home', route('home'));
             });
 
-
         Route::get('/about', function () {
             return Breadcrumbs::current()->toJson();
         })
@@ -62,11 +61,11 @@ class BreadcrumbsTest extends TestCase
             ->assertJson([
                 [
                     'title' => 'Home',
-                    'url'   => 'http://127.0.0.1:8000',
+                    'url'   => 'http://localhost',
                 ],
                 [
                     'title' => 'About',
-                    'url'   => 'http://127.0.0.1:8000/about',
+                    'url'   => 'http://localhost/about',
                 ]
             ]);
     }
@@ -85,7 +84,7 @@ class BreadcrumbsTest extends TestCase
             ->assertJson([
                 [
                     'title' => 'About',
-                    'url'   => 'http://127.0.0.1:8000/breadcrumbs-about-test',
+                    'url'   => 'http://localhost/breadcrumbs-about-test',
                 ],
             ]);
     }

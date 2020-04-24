@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Tabuna\Breadcrumbs;
 
-use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Routing\Route;
 use Illuminate\Support\ServiceProvider;
 use function Opis\Closure\serialize;
 
-class BreadcrumbsServiceProvider extends ServiceProvider implements DeferrableProvider
+class BreadcrumbsServiceProvider extends ServiceProvider
 {
     /**
      * Register the service provider.

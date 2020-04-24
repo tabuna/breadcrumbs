@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace Tabuna\Breadcrumbs\Tests;
 
 use Orchestra\Testbench\TestCase as BaseCase;
-use Tabuna\Breadcrumbs\Breadcrumbs;
 use Tabuna\Breadcrumbs\BreadcrumbsServiceProvider;
-
+use Tabuna\Breadcrumbs\Breadcrumbs;
 
 class TestCase extends BaseCase
 {
@@ -16,10 +15,10 @@ class TestCase extends BaseCase
      *
      * @return array
      */
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
-            BreadcrumbsServiceProvider::class,
+            BreadcrumbsServiceProvider::class
         ];
     }
 
@@ -28,7 +27,7 @@ class TestCase extends BaseCase
      *
      * @return array
      */
-    protected function getPackageAliases($app)
+    protected function getPackageAliases($app): array
     {
         return [
             'Breadcrumbs' => Breadcrumbs::class,

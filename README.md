@@ -1,5 +1,7 @@
 # <img src="https://raw.githubusercontent.com/tabuna/breadcrumbs/master/logo.svg" width="30" height="30" alt="Laravel Breadcrumbs"> Laravel Breadcrumbs
 
+![run-tests](https://github.com/tabuna/breadcrumbs/workflows/run-tests/badge.svg)
+
 Breadcrumbs display a list of links indicating the position of the current page in the whole site hierarchy. For example, breadcrumbs like `Home / Sample Post / Edit`
 means the user is viewing an edit page for the "Sample Post". He can click on "Sample Post" to view that page, or he can click on "Home" to return to the homepage.
 
