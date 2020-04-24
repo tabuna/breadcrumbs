@@ -1,13 +1,11 @@
 # <img src="https://raw.githubusercontent.com/tabuna/breadcrumbs/master/logo.svg" width="30" height="30" alt="Laravel Breadcrumbs"> Laravel Breadcrumbs
 
-Breadcrumbs displays a list of links indicating the position of the current page in the whole site hierarchy. For example, breadcrumbs like
+Breadcrumbs display a list of links indicating the position of the current page in the whole site hierarchy. For example, breadcrumbs like `Home / Sample Post / Edit`
+means the user is viewing an edit page for the "Sample Post". He can click on "Sample Post" to view that page, or he can click on "Home" to return to the homepage.
 
 > [Home](#) / [Sample Post](#) / Edit
 
-means the user is viewing an edit page for the "Sample Post". He can click on "Sample Post" to view that page, or he can click on "Home" to return to the homepage.
-
-
-## Getting Started
+This package for the [Laravel framework](https://laravel.com/) will make it easy to build breadcrumbs in your application.
 
 ## Installation
 
@@ -17,7 +15,7 @@ $ composer require tabuna/breadcrumbs
 ```
 This will update `composer.json` and install the package into the `vendor/` directory.
 
-### Base Usage
+## Base Usage
 
 Now you can define breadcrumbs directly in the route files:
 
@@ -88,13 +86,8 @@ In order to display breadcrumbs on the desired page, simply call:
 
 And results in this output:
 
-> [Home](#) / Blog
+> [Home](#) / About
 
-#### Tests
-
-```bash
-php vendor/bin/phpunit 
-```
 
 ## Donate & Support
 
