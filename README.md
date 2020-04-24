@@ -1,21 +1,87 @@
 # Laravel Breadcrumbs
 
-
+## Getting Started
 
 ## Installation
 
-Download using Composer:
+Run this at the command line:
 ```php
 $ composer require tabuna/breadcrumbs
 ```
+This will update `composer.json` and install the package into the `vendor/` directory.
 
 ### Base Usage
 
+Now you can define breadcrumbs directly in the route files:
 
 ```php
+use Tabuna\Breadcrumbs\Trail;
 
+// Home
+Route::get('/', fn () => view('home'))
+    ->name('home')
+    ->breadcrumbs(fn (Trail $trail) =>
+        $trail->push('Home', route('home'))
+);
+
+// Home > About
+Route::get('/about', fn () => view('home'))
+    ->name('about')
+    ->breadcrumbs(fn (Trail $trail) =>
+        $trail->parent('home')->push('About', route('about'))
+);
 ```
 
+You can also define breadcrumbs separately from the route:
+
+```php
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+use Tabuna\Breadcrumbs\Breadcrumbs;
+use Tabuna\Breadcrumbs\Trail;
+
+class BreadcrumbsServiceProvider extends ServiceProvider
+{
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        Breadcrumbs::for('home', fn (Trail $trail) =>
+             $trail->push('Home', route('home'))
+        );
+    }
+}
+```
+
+## Output the breadcrumbs
+
+In order to display breadcrumbs on the desired page, simply call:
+
+```php
+@foreach (Breadcrumbs::current() as $crumbs)
+    @if ($crumbs->url() && !$loop->last)
+        <li class="breadcrumb-item">
+            <a href="{{ $crumbs->url() }}">
+                {{ $crumbs->title() }}
+            </a>
+        </li>
+    @else
+        <li class="breadcrumb-item active">
+            {{ $crumbs->title() }}
+        </li>
+    @endif
+@endforeach
+```
+
+And results in this output:
+
+> [Home](#) / Blog
 
 #### Tests
 

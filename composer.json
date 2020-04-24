@@ -1,0 +1,43 @@
+{
+    "name": "tabuna/breadcrumbs-tabuna",
+    "description": "Breadcrumbs made easy for Laravel.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "tabuna",
+            "email": "bliz48rus@gmail.com"
+        }
+    ],
+    "require": {
+        "laravel/framework": "^7.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "~5.0",
+        "phpunit/php-code-coverage": "^7.0",
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tabuna\\Breadcrumbs\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tabuna\\Breadcrumbs\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Tabuna\\Breadcrumbs\\BreadcrumbsServiceProvider"
+            ],
+            "aliases": {
+                "Breadcrumbs": "Tabuna\\Breadcrumbs\\Breadcrumbs"
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
+
