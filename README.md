@@ -39,6 +39,19 @@ Route::get('/about', fn () => view('home'))
 );
 ```
 
+You can also get arguments from the request:
+
+```php
+Route::get('/category/{category}', function (Category $category){
+    //In this example, the category object is your Eloquent model.
+    //code...
+})
+    ->name('category')
+    ->breadcrumbs(fn (Trail $trail, Category $category) =>
+        $trail->push($category->title, route('category', $category->id))
+);
+```
+
 You can also define breadcrumbs separately from the route:
 
 ```php
