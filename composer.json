@@ -17,7 +17,8 @@
         }
     ],
     "require": {
-        "laravel/framework": "^7.0"
+        "laravel/framework": "^7.0",
+        "opis/closure": "^3.5"
     },
     "require-dev": {
         "orchestra/testbench": "~5.0",
