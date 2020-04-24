@@ -15,7 +15,7 @@ $ composer require tabuna/breadcrumbs
 ```
 This will update `composer.json` and install the package into the `vendor/` directory.
 
-## Base Usage
+## Define your breadcrumbs
 
 Now you can define breadcrumbs directly in the route files:
 
