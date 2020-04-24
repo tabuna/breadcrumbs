@@ -6,7 +6,7 @@
 
 Download using Composer:
 ```php
-$ composer require orchid/experiment
+$ composer require tabuna/breadcrumbs
 ```
 
 ### Base Usage
