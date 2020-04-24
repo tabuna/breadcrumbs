@@ -94,6 +94,10 @@ And results in this output:
 If you would like to support development by making a donation you can do so [here](https://www.paypal.me/tabuna/10usd). &#x1F60A;
 
 
+## Credits
+
+For several years, I successfully used the [Dave James Miller](https://github.com/davejamesmiller/laravel-breadcrumbs) package to solve my problems, but he stopped developing and supporting it. After a long search for alternatives, I liked the [Dwight Watson](https://github.com/dwightwatson) package, but the isolation of breadcrumbs from the announcement of the routes did not give me rest. That's why I created this package, it uses the code of both previous packages.
+
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE) for more information.
