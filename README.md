@@ -1,4 +1,4 @@
-# <img src="https://raw.githubusercontent.com/tabuna/breadcrumbs/master/logo.svg" width="30" height="30" alt="Laravel Breadcrumbs"> Laravel Breadcrumbs
+# <img src="https://raw.githubusercontent.com/tabuna/breadcrumbs/master/logo.svg" width="50" height="50" alt="Laravel Breadcrumbs"> Laravel Breadcrumbs
 
 ![Tests](https://github.com/tabuna/breadcrumbs/workflows/run-tests/badge.svg)
 [![codecov](https://codecov.io/gh/tabuna/breadcrumbs/branch/master/graph/badge.svg)](https://codecov.io/gh/tabuna/breadcrumbs)
