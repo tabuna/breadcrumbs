@@ -55,7 +55,17 @@ Route::get('/category/{category}', function (Category $category){
 );
 ```
 
-You can also define breadcrumbs separately from the route:
+## Route resource
+
+When using resources, a whole group of routes is declared for which you must specify values manually
+
+```php
+// routes/web.php
+
+Route::resource('photos', 'PhotoController');
+````
+
+It’s better to specify this in service providers, since route files can be cached
 
 ```php
 <?php
@@ -75,12 +85,55 @@ class BreadcrumbsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Breadcrumbs::for('home', fn (Trail $trail) =>
-             $trail->push('Home', route('home'))
+        Breadcrumbs::for('photos.index', fn (Trail $trail) =>
+             $trail->push('Photos', route('home'))
+        );
+        
+        Breadcrumbs::for('photos.create', fn (Trail $trail) =>
+            $trail
+                ->parent('photos.index', route('photos.index'))
+                ->push('Add new photo', route('home'))
         );
     }
 }
 ```
+
+## Like to use a separate route file?
+
+You can do this simply by adding the desired file to the service provider
+
+```php
+namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+
+class BreadcrumbsServiceProvider extends ServiceProvider
+{
+    /**
+     * Bootstrap the application events.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        require base_path('routes/breadcrumbs.php');
+    }
+}
+```
+
+Then it will be your special file in the route directory:
+
+```php
+// routes/breadcrumbs.php
+
+
+// Photos
+Breadcrumbs::for('photo.index', fn (Trail $trail) =>
+    $trail->parent('home')
+        ->push('Photos', route('photo.index'))
+);
+```
+
 
 ## Output the breadcrumbs
 
