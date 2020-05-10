@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Facade;
 /**
  * Class Breadcrumbs.
  *
- * @method static bool has(string $name)
+ * @method static bool has(string $name = null)
  * @method static Collection current()
  * @method static void for(string $route, \Closure $definition)
  */
