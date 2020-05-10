@@ -19,12 +19,16 @@ class BreadcrumbsServiceProvider extends ServiceProvider
     {
         $this->app->singleton(Manager::class);
 
+        \Illuminate\Support\Facades\Route::middlewareGroup('breadcrumbs', [
+            BreadcrumbsMiddleware::class,
+        ]);
+
         if (Route::hasMacro('breadcrumbs')) {
             return;
         }
 
         Route::macro('breadcrumbs', function (callable $closure) {
-            $this->middleware(BreadcrumbsMiddleware::class)
+            $this->middleware('breadcrumbs')
                 ->defaults(BreadcrumbsMiddleware::class, serialize($closure));
 
             return $this;
