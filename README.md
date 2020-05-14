@@ -46,6 +46,8 @@ Route::get('/about', fn () => view('home'))
 You can also get arguments from the request:
 
 ```php
+<?php
+
 Route::get('/category/{category}', function (Category $category){
     //In this example, the category object is your Eloquent model.
     //code...
