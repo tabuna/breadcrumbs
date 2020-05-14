@@ -25,6 +25,7 @@ This will update `composer.json` and install the package into the `vendor/` dire
 Now you can define breadcrumbs directly in the route files:
 
 ```php
+<?php
 use Tabuna\Breadcrumbs\Trail;
 
 // Home
@@ -60,7 +61,7 @@ Route::get('/category/{category}', function (Category $category){
 When using resources, a whole group of routes is declared for which you must specify values manually
 
 ```php
-// routes/web.php
+<?php // routes/web.php
 
 Route::resource('photos', 'PhotoController');
 ````
@@ -103,6 +104,8 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 You can do this simply by adding the desired file to the service provider
 
 ```php
+<?php
+
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
@@ -124,7 +127,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 Then it will be your special file in the route directory:
 
 ```php
-// routes/breadcrumbs.php
+<?php // routes/breadcrumbs.php
 
 
 // Photos
@@ -139,7 +142,7 @@ Breadcrumbs::for('photo.index', fn (Trail $trail) =>
 
 In order to display breadcrumbs on the desired page, simply call:
 
-```php
+```html
 @foreach (Breadcrumbs::current() as $crumbs)
     @if ($crumbs->url() && !$loop->last)
         <li class="breadcrumb-item">
