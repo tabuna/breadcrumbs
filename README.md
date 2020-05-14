@@ -144,7 +144,7 @@ Breadcrumbs::for('photo.index', fn (Trail $trail) =>
 
 In order to display breadcrumbs on the desired page, simply call:
 
-```html
+```blade
 @foreach (Breadcrumbs::current() as $crumbs)
     @if ($crumbs->url() && !$loop->last)
         <li class="breadcrumb-item">
