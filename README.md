@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://raw.githubusercontent.com/tabuna/breadcrumbs/master/laravel-breadcrumbs.svg" height=" 64px;">
+    <img src="https://raw.githubusercontent.com/tabuna/breadcrumbs/master/laravel-breadcrumbs.svg" height="64px;" alt="Laravel Breadcrumbs">
 </p>
 
 
