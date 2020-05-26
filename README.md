@@ -3,10 +3,13 @@
 </p>
 
 
-![Tests](https://github.com/tabuna/breadcrumbs/workflows/run-tests/badge.svg)
-[![codecov](https://codecov.io/gh/tabuna/breadcrumbs/branch/master/graph/badge.svg)](https://codecov.io/gh/tabuna/breadcrumbs)
-[![Total Downloads](https://img.shields.io/packagist/dt/tabuna/breadcrumbs.svg)](https://packagist.org/packages/tabuna/breadcrumbs)
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/tabuna/breadcrumbs.svg)](https://packagist.org/packages/tabuna/breadcrumbs)
+<p align="center">
+<img src="https://github.com/tabuna/breadcrumbs/workflows/run-tests/badge.svg" alt="Tests">
+<a href="https://codecov.io/gh/tabuna/breadcrumbs"><img src="https://codecov.io/gh/tabuna/breadcrumbs/branch/master/graph/badge.svg" alt="codecov"></a>
+<a href="https://packagist.org/packages/tabuna/breadcrumbs"><img src="https://img.shields.io/packagist/dt/tabuna/breadcrumbs.svg" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/tabuna/breadcrumbs"><img src="https://img.shields.io/packagist/v/tabuna/breadcrumbs.svg" alt="Latest Version on Packagist"></a>
+</p>
+
 
 ## Introduction
 
