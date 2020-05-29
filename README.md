@@ -33,7 +33,6 @@ This will update `composer.json` and install the package into the `vendor/` dire
 Now you can define breadcrumbs directly in the route files:
 
 ```php
-<?php
 use Tabuna\Breadcrumbs\Trail;
 
 // Home
@@ -54,8 +53,6 @@ Route::get('/about', fn () => view('home'))
 You can also get arguments from the request:
 
 ```php
-<?php
-
 Route::get('/category/{category}', function (Category $category){
     //In this example, the category object is your Eloquent model.
     //code...
@@ -71,7 +68,7 @@ Route::get('/category/{category}', function (Category $category){
 When using resources, a whole group of routes is declared for which you must specify values manually
 
 ```php
-<?php // routes/web.php
+// routes/web.php
 
 Route::resource('photos', 'PhotoController');
 ````
@@ -79,8 +76,6 @@ Route::resource('photos', 'PhotoController');
 It’s better to specify this in service providers, since route files can be cached
 
 ```php
-<?php
-
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
@@ -114,8 +109,6 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 You can do this simply by adding the desired file to the service provider
 
 ```php
-<?php
-
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
@@ -137,7 +130,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 Then it will be your special file in the route directory:
 
 ```php
-<?php // routes/breadcrumbs.php
+// routes/breadcrumbs.php
 
 
 // Photos
