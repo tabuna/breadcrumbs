@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tabuna\Breadcrumbs;
 
 use Closure;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 
@@ -45,12 +46,16 @@ class Manager
     }
 
     /**
+     * @param null $parameters
+     *
      * @return Collection
      * @throws \Throwable
      */
-    public function current(): Collection
+    public function current($parameters = null): Collection
     {
-        return $this->generator->generate();
+        $parameters = Arr::wrap($parameters);
+
+        return $this->generator->generate($parameters);
     }
 
     /**

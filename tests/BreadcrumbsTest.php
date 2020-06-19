@@ -39,7 +39,8 @@ class BreadcrumbsTest extends TestCase
         $this->get('/undefined')->assertOk();
     }
 
-    public function testBreadcrumbsParent(): void {
+    public function testBreadcrumbsParent(): void
+    {
 
         Route::get('/', function () {
 
@@ -66,7 +67,7 @@ class BreadcrumbsTest extends TestCase
                 [
                     'title' => 'About',
                     'url'   => 'http://localhost/about',
-                ]
+                ],
             ]);
     }
 
@@ -109,6 +110,41 @@ class BreadcrumbsTest extends TestCase
                 [
                     'title' => 'Sum',
                     'url'   => $random + $random,
+                ],
+            ]);
+    }
+
+    public function testBreadcrumbsParamsForCurrent(): void
+    {
+        $params = ['value 1', 'value 2', 'value 3'];
+
+        Route::get('breadcrumbs-about-test', function (UrlBind $bind) use ($params) {
+            $bind->getRouteKey();
+
+            return Breadcrumbs::current($params)->toJson();
+        })
+            ->middleware(SubstituteBindings::class)
+            ->name('breadcrumbs.about')
+            ->breadcrumbs(function (Trail $trail, $value, $value2, $value3) {
+                return $trail
+                    ->push('Arguments', $value)
+                    ->push('Arguments2', $value2)
+                    ->push('Arguments3', $value3);
+            });
+
+        $this->get(\route('breadcrumbs.about', $params))
+            ->assertJson([
+                [
+                    'title' => 'Arguments',
+                    'url'   => $params[0],
+                ],
+                [
+                    'title' => 'Arguments2',
+                    'url'   => $params[1],
+                ],
+                [
+                    'title' => 'Arguments3',
+                    'url'   => $params[2],
                 ],
             ]);
     }

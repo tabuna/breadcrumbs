@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\Facade;
  * Class Breadcrumbs.
  *
  * @method static bool has(string $name = null)
- * @method static Collection current()
- * @method static void for(string $route, \Closure $definition)
+ * @method static Collection current($parameters = null)
+ * @method static void for (string $route, \Closure $definition)
  */
 class Breadcrumbs extends Facade
 {
