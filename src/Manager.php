@@ -53,9 +53,21 @@ class Manager
      */
     public function current($parameters = null): Collection
     {
+        return $this->generate(Route::current()->getName(), $parameters);
+    }
+
+    /**
+     * @param $route
+     * @param null $parameters
+     *
+     * @return Collection
+     * @throws \Throwable
+     */
+    public function generate($route, $parameters = null): Collection
+    {
         $parameters = Arr::wrap($parameters);
 
-        return $this->generator->generate($parameters);
+        return $this->generator->generate($route, $parameters);
     }
 
     /**
