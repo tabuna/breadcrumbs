@@ -69,16 +69,14 @@ class Trail
      * @return \Illuminate\Support\Collection
      * @throws \Throwable
      */
-    public function generate(array $parameters = null): Collection
+    public function generate($route, array $parameters = null): Collection
     {
-        $route = Route::current();
-
         $parameters = empty($parameters)
             ? $route->parameters()
             : $parameters;
 
-        if ($route && $this->registrar->has($route->getName())) {
-            $this->call($route->getName(), $parameters);
+        if ($route && $this->registrar->has($route)) {
+            $this->call($route, $parameters);
         }
 
         return $this->breadcrumbs;
