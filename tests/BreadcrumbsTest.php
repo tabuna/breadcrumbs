@@ -149,4 +149,26 @@ class BreadcrumbsTest extends TestCase
             ]);
     }
 
+    public function testBreadcrumbsForOtherRoute(): void
+    {
+        Route::get('/breadcrumbs-home', function () {
+            return null;
+        })->name('breadcrumbs-home');
+
+        Route::get('/breadcrumbs-home-other', function () {
+            return Breadcrumbs::generate('breadcrumbs-home')->toJson();
+        })->name('breadcrumbs-home');
+
+        Breadcrumbs::for('breadcrumbs-home', function (Trail $trail) {
+            return $trail->push('Home', 'http://localhost/');
+        });
+
+        $this->get('/breadcrumbs-home-other')->assertJson([
+            [
+                'title' => 'Home',
+                'url'   => 'http://localhost/',
+            ],
+        ]);
+    }
+
 }

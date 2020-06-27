@@ -57,13 +57,13 @@ class Manager
     }
 
     /**
-     * @param $route
-     * @param null $parameters
+     * @param string $route
+     * @param mixed|null $parameters
      *
      * @return Collection
      * @throws \Throwable
      */
-    public function generate($route, $parameters = null): Collection
+    public function generate(string $route, $parameters = null): Collection
     {
         $parameters = Arr::wrap($parameters);
 

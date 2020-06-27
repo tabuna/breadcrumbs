@@ -64,15 +64,16 @@ class Trail
     /**
      * Generate the collection of breadcrumbs from the given route.
      *
+     * @param string $route
      * @param array $parameters
      *
      * @return \Illuminate\Support\Collection
      * @throws \Throwable
      */
-    public function generate($route, array $parameters = null): Collection
+    public function generate(string $route, array $parameters = null): Collection
     {
         $parameters = empty($parameters)
-            ? $route->parameters()
+            ? Route::getRoutes()->getByName($route)->parameters()
             : $parameters;
 
         if ($route && $this->registrar->has($route)) {
