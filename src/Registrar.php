@@ -58,10 +58,6 @@ class Registrar
      */
     public function set(string $name, Closure $definition): void
     {
-        throw_if($this->has($name),
-            Exception::class,
-            "Breadcrumbs have already been defined for route [{$name}].");
-
         $this->definitions[$name] = $definition;
     }
 }
