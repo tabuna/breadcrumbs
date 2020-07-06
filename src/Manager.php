@@ -8,9 +8,12 @@ use Closure;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Traits\Macroable;
 
 class Manager
 {
+    use Macroable;
+
     /**
      * The breadcrumb generator.
      *
