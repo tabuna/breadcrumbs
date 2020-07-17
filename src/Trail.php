@@ -93,10 +93,11 @@ class Trail
             return $parameters;
         }
 
-        /** @var \Illuminate\Routing\RouteCollection $routes */
-        $routes = Route::getRoutes();
+        $route = Route::currentRouteName() === $name
+            ? Route::current()
+            : Route::getRoutes()->getByName($name);
 
-        return optional($routes->getByName($name))->parameters() ?? $parameters;
+        return optional($route)->parameters ?? $parameters;
     }
 
     /**
