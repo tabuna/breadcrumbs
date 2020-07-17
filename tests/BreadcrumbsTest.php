@@ -194,7 +194,32 @@ class BreadcrumbsTest extends TestCase
         }
 
         $this->get('/overwrite')->assertJson([
-            'exist' => true
+            'exist' => true,
         ]);
+    }
+
+    public function testBreadcrumbsCacheDefined(): void
+    {
+        Route::get('/breadcrumbs-home', function () {
+
+            Route::getRoutes()->refreshNameLookups();
+            $route = Route::getRoutes()->getByName('breadcrumbs-home');
+            $route->parameters = null;
+
+            return Breadcrumbs::current()->toJson();
+        })->name('breadcrumbs-home');
+
+
+        Breadcrumbs::for('breadcrumbs-home', function (Trail $trail) {
+            return $trail->push('Home', 'http://localhost/');
+        });
+
+        $this->get('/breadcrumbs-home')
+            ->assertJson([
+                [
+                    'title' => 'Home',
+                    'url'   => 'http://localhost/',
+                ],
+            ]);
     }
 }
