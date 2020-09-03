@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tabuna\Breadcrumbs\Tests;
 
 use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Breadcrumbs;
 use Tabuna\Breadcrumbs\Trail;
@@ -221,5 +222,37 @@ class BreadcrumbsTest extends TestCase
                     'url'   => 'http://localhost/',
                 ],
             ]);
+    }
+
+    public function testBreadcrumbsTimesOne(): void
+    {
+        $log = storage_path() . '/logs/laravel.log';
+
+        file_put_contents($log, '');
+
+        Route::get('times', function () use ($log) {
+
+            Breadcrumbs::current();
+
+            $logCollection = [];
+
+            foreach (file($log) as $line_num => $line) {
+                $logCollection[] = [
+                    'line'    => $line_num,
+                    'content' => htmlspecialchars($line),
+                ];
+            }
+
+            return count($logCollection);
+        })->name('times')
+            ->breadcrumbs(function (Trail $trail) {
+                $trail->push('times one');
+
+                Log::debug('Dashboard pushed');
+            });
+
+        $count = $this->get('/times')->content();
+
+        $this->assertEquals('1', $count);
     }
 }
