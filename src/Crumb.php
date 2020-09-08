@@ -25,10 +25,9 @@ class Crumb implements JsonSerializable
     /**
      * Construct the crumb instance.
      *
-     * @param string $title
-     * @param string $url
+     * @param string      $title
+     * @param string|null $url
      *
-     * @return void
      */
     public function __construct(string $title, string $url = null)
     {

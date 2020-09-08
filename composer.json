@@ -18,7 +18,8 @@
     ],
     "require": {
         "laravel/framework": "^8.0",
-        "opis/closure": "^3.5"
+        "opis/closure": "^3.5",
+        "ext-json": "*"
     },
     "require-dev": {
         "orchestra/testbench": "~6.0",

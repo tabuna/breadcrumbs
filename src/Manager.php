@@ -74,7 +74,7 @@ class Manager
     }
 
     /**
-     * @param string $name
+     * @param string|null $name
      *
      * @return bool
      */

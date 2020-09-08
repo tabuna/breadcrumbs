@@ -139,8 +139,8 @@ class Trail
     /**
      * Add a breadcrumb to the collection.
      *
-     * @param string $title
-     * @param string $url
+     * @param string      $title
+     * @param string|null $url
      *
      * @return Trail
      */
