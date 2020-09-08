@@ -17,11 +17,11 @@
         }
     ],
     "require": {
-        "laravel/framework": "^7.0",
+        "laravel/framework": "^8.0",
         "opis/closure": "^3.5"
     },
     "require-dev": {
-        "orchestra/testbench": "~5.0",
+        "orchestra/testbench": "~6.0",
         "phpunit/php-code-coverage": "^7.0",
         "phpunit/phpunit": "^8.0"
     },
