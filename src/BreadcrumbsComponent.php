@@ -17,7 +17,7 @@ class BreadcrumbsComponent extends Component
     /**
      * @var string|null
      */
-    public $name;
+    public $route;
 
     /**
      * @var mixed|null
@@ -38,21 +38,21 @@ class BreadcrumbsComponent extends Component
      * Create a new component instance.
      *
      * @param Manager     $manager
-     * @param string|null $name
+     * @param string|null $route
      * @param mixed|null  $parameters
      * @param string|null $class
      * @param string|null $active
      */
     public function __construct(
         Manager $manager,
-        string $name = null,
+        string $route = null,
         $parameters = null,
         string $class = null,
         string $active = null
     )
     {
         $this->breadcrumbs = $manager;
-        $this->name = $name;
+        $this->route = $route;
         $this->parameters = $parameters;
         $this->class = $class;
         $this->active = $active;
@@ -64,8 +64,8 @@ class BreadcrumbsComponent extends Component
      */
     public function generate(): Collection
     {
-        if ($this->name !== null) {
-            return $this->breadcrumbs->generate($this->name, $this->parameters);
+        if ($this->route !== null) {
+            return $this->breadcrumbs->generate($this->route, $this->parameters);
         }
 
         return $this->breadcrumbs->current($this->parameters);
@@ -78,7 +78,7 @@ class BreadcrumbsComponent extends Component
      */
     public function render()
     {
-        return $this->breadcrumbs->has($this->name)
+        return $this->breadcrumbs->has($this->route)
             ? view('breadcrumbs::breadcrumbs')
             : '';
     }

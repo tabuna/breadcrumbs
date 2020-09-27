@@ -1,3 +1,3 @@
 <x-tabuna-breadcrumbs
-    name="static"
+    route="static"
 />
