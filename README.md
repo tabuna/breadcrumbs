@@ -13,8 +13,8 @@
 
 ## Introduction
 
-Breadcrumbs display a list of links indicating the position of the current page in the whole site hierarchy. For example, breadcrumbs like `Home / Sample Post / Edit`
-means the user is viewing an edit page for the "Sample Post". He can click on "Sample Post" to view that page, or he can click on "Home" to return to the homepage.
+Breadcrumbs display a list of links indicating the position of the current page in the whole site hierarchy. For example, breadcrumbs like `Home / Sample Post / Edit` means the user is viewing an edit page for the "Sample Post." He can click on "Sample Post" to view that page or click on "Home" to return to the homepage.
+
 
 > [Home](#) / [Sample Post](#) / Edit
 
@@ -167,7 +167,7 @@ And results in this output:
 
 ## Credits
 
-For several years, I successfully used the [Dave James Miller](https://github.com/davejamesmiller/laravel-breadcrumbs) package to solve my problems, but he stopped developing and supporting it. After a long search for alternatives, I liked the [Dwight Watson](https://github.com/dwightwatson) package, but the isolation of breadcrumbs from the announcement of the routes did not give me rest. That's why I created this package, it uses the code of both previous packages.
+For several years, I successfully used the [Dave James Miller](https://github.com/davejamesmiller/laravel-breadcrumbs) package to solve my problems, but he stopped developing and supporting it. After a long search for alternatives, I liked the [Dwight Watson](https://github.com/dwightwatson) package, but the isolation of breadcrumbs from the announcement of the routes did not give me rest. That's why I created this package. It uses the code of both previous packages.
 
 ## License
 
