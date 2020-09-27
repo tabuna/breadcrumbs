@@ -18,7 +18,8 @@ class TestCase extends BaseCase
     protected function getPackageProviders($app): array
     {
         return [
-            BreadcrumbsServiceProvider::class
+            BreadcrumbsServiceProvider::class,
+            TestServiceProvider::class
         ];
     }
 
