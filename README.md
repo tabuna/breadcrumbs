@@ -140,8 +140,42 @@ Breadcrumbs::for('photo.index', fn (Trail $trail) =>
 );
 ```
 
+## Output the breadcrumbs use Blade Component
 
-## Output the breadcrumbs
+You can use the output component:
+
+```blade
+<ul>
+    <x-tabuna-breadcrumbs/>
+</ul>
+```
+
+To define classes of list items, you can specify:
+
+```blade
+<x-tabuna-breadcrumbs
+  class="item"
+  active="active"
+/>
+```
+
+You can also pass parameters:
+
+```blade
+<x-tabuna-breadcrumbs
+    parameters="['value 1', 'value 2', 'value 3']"
+/>
+```
+
+And call named routes explicitly:
+
+```blade
+<x-tabuna-breadcrumbs
+    route="static"
+/>
+```
+
+## Output the breadcrumbs use Blade view
 
 In order to display breadcrumbs on the desired page, simply call:
 
