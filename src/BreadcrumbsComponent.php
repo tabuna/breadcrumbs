@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tabuna\Breadcrumbs;
 
-use Illuminate\View\Component;
 use Illuminate\Support\Collection;
+use Illuminate\View\Component;
 
 class BreadcrumbsComponent extends Component
 {
@@ -72,14 +72,22 @@ class BreadcrumbsComponent extends Component
     }
 
     /**
+     * Determine if the component should be rendered.
+     *
+     * @return bool
+     */
+    public function shouldRender(): bool
+    {
+        return $this->breadcrumbs->has($this->route);
+    }
+
+    /**
      * Get the view / contents that represent the component.
      *
      * @return \Illuminate\View\View|string
      */
     public function render()
     {
-        return $this->breadcrumbs->has($this->route)
-            ? view('breadcrumbs::breadcrumbs')
-            : '';
+        return view('breadcrumbs::breadcrumbs');
     }
 }
