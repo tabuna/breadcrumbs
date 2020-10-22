@@ -135,8 +135,7 @@ Then it will be your special file in the route directory:
 
 // Photos
 Breadcrumbs::for('photo.index', fn (Trail $trail) =>
-    $trail->parent('home')
-        ->push('Photos', route('photo.index'))
+    $trail->parent('home')->push('Photos', route('photo.index'))
 );
 ```
 
