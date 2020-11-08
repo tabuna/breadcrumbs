@@ -56,7 +56,13 @@ class Manager
      */
     public function current($parameters = null): Collection
     {
-        return $this->generate(Route::current()->getName(), $parameters);
+        $name = optional(Route::current())->getName();
+
+        if ($name === null) {
+            return collect();
+        }
+
+        return $this->generate($name, $parameters);
     }
 
     /**

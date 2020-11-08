@@ -18,7 +18,7 @@ class Crumb implements JsonSerializable
     /**
      * The crumb URL.
      *
-     * @var string
+     * @var string|null
      */
     protected $url;
 
