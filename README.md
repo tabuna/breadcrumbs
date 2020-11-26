@@ -63,6 +63,43 @@ Route::get('/category/{category}', function (Category $category){
 );
 ```
 
+## Like to use a separate route file?
+
+You can do this simply by adding the desired file to the service provider
+
+```php
+namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+
+class BreadcrumbsServiceProvider extends ServiceProvider
+{
+    /**
+     * Bootstrap the application events.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        require base_path('routes/breadcrumbs.php');
+    }
+}
+```
+
+Then it will be your special file in the route directory:
+
+```php
+// routes/breadcrumbs.php
+
+
+// Photos
+Breadcrumbs::for('photo.index', fn (Trail $trail) =>
+    $trail->parent('home')->push('Photos', route('photo.index'))
+);
+```
+
+
+
 ## Route resource
 
 When using resources, a whole group of routes is declared for which you must specify values manually
@@ -102,41 +139,6 @@ class BreadcrumbsServiceProvider extends ServiceProvider
         );
     }
 }
-```
-
-## Like to use a separate route file?
-
-You can do this simply by adding the desired file to the service provider
-
-```php
-namespace App\Providers;
-
-use Illuminate\Support\ServiceProvider;
-
-class BreadcrumbsServiceProvider extends ServiceProvider
-{
-    /**
-     * Bootstrap the application events.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        require base_path('routes/breadcrumbs.php');
-    }
-}
-```
-
-Then it will be your special file in the route directory:
-
-```php
-// routes/breadcrumbs.php
-
-
-// Photos
-Breadcrumbs::for('photo.index', fn (Trail $trail) =>
-    $trail->parent('home')->push('Photos', route('photo.index'))
-);
 ```
 
 ## Output the breadcrumbs use Blade Component
