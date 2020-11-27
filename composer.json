@@ -17,7 +17,7 @@
         }
     ],
     "require": {
-        "laravel/framework": "^8.0",
+        "laravel/framework": "^8.16",
         "opis/closure": "^3.5",
         "ext-json": "*"
     },
