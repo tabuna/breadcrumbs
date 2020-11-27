@@ -26,6 +26,9 @@
         "phpunit/php-code-coverage": "^9.0",
         "phpunit/phpunit": "^9.4"
     },
+    "conflict": {
+        "mockery/mockery": "<1.4.2"
+    },
     "autoload": {
         "psr-4": {
             "Tabuna\\Breadcrumbs\\": "src/"
