@@ -44,7 +44,6 @@ class BreadcrumbsTest extends TestCase
     {
 
         Route::get('/', function () {
-
         })
             ->name('home')
             ->breadcrumbs(function (Trail $trail) {
@@ -254,5 +253,27 @@ class BreadcrumbsTest extends TestCase
         $count = $this->get('/times')->content();
 
         $this->assertEquals('1', $count);
+    }
+
+
+    public function testBreadcrumbsIdempotency(): void
+    {
+        Route::get('/breadcrumbs-home', function () {
+            Breadcrumbs::current();
+
+            return Breadcrumbs::current()->toJson();
+        })->name('breadcrumbs-home');
+
+        Breadcrumbs::for('breadcrumbs-home', function (Trail $trail) {
+            return $trail->push('Home', 'http://localhost/');
+        });
+
+        $this->get('/breadcrumbs-home')
+            ->assertExactJson([
+                [
+                    'title' => 'Home',
+                    'url'   => 'http://localhost/',
+                ],
+            ]);
     }
 }
