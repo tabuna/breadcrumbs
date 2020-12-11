@@ -255,11 +255,11 @@ class BreadcrumbsTest extends TestCase
         $this->assertEquals('1', $count);
     }
 
-
     public function testBreadcrumbsIdempotency(): void
     {
         Route::get('/breadcrumbs-home', function () {
             Breadcrumbs::current();
+            Breadcrumbs::generate('breadcrumbs-home');
 
             return Breadcrumbs::current()->toJson();
         })->name('breadcrumbs-home');

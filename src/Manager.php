@@ -22,13 +22,6 @@ class Manager
     protected $generator;
 
     /**
-     * The cached current breadcrumb trail.
-     *
-     * @var Collection
-     */
-    protected $cachedCurrentBreadcrumbs;
-
-    /**
      * Create the instance of the manager.
      *
      * @param Trail $generator
@@ -63,17 +56,13 @@ class Manager
      */
     public function current($parameters = null): Collection
     {
-        if ($this->cachedCurrentBreadcrumbs) {
-            return $this->cachedCurrentBreadcrumbs;
-        }
-
         $name = optional(Route::current())->getName();
 
         if ($name === null) {
             return collect();
         }
 
-        return $this->cachedCurrentBreadcrumbs = $this->generate($name, $parameters);
+        return $this->generate($name, $parameters);
     }
 
     /**

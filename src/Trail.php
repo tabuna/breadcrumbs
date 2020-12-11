@@ -72,6 +72,10 @@ class Trail
      */
     public function generate(string $route, array $parameters = []): Collection
     {
+        $this->breadcrumbs = $this->breadcrumbs->whenNotEmpty(function () {
+            return new Collection();
+        });
+
         $parameters = $this->getRouteByNameParameters($route, $parameters);
 
         if ($route && $this->registrar->has($route)) {
