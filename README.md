@@ -26,6 +26,7 @@ Run this at the command line:
 ```php
 $ composer require tabuna/breadcrumbs
 ```
+
 This will update `composer.json` and install the package into the `vendor/` directory.
 
 ## Define your breadcrumbs
@@ -62,6 +63,27 @@ Route::get('/category/{category}', function (Category $category){
         $trail->push($category->title, route('category', $category->id))
 );
 ```
+
+
+## Route detection
+
+The package tries to reduce the number of lines needed. For this, you can skip passing the results of the `route()` methods.
+The following two declarations will be equivalent:
+
+```php
+Route::get('/', fn () => view('home'))
+    ->name('home')
+    ->breadcrumbs(fn (Trail $trail) =>
+        $trail->push('Home', route('home'))
+);
+
+Route::get('/', fn () => view('home'))
+    ->name('home')
+    ->breadcrumbs(fn (Trail $trail) =>
+        $trail->push('Home', 'home')
+);
+```
+
 
 ## Like to use a separate route file?
 

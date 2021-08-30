@@ -276,4 +276,23 @@ class BreadcrumbsTest extends TestCase
                 ],
             ]);
     }
+
+    public function testBreadcrumbsShortRoute(): void
+    {
+        Route::get('breadcrumbs-about-test', function () {
+            return Breadcrumbs::current()->toJson();
+        })
+            ->name('breadcrumbs.about')
+            ->breadcrumbs(function (Trail $trail) {
+                return $trail->push('About', 'breadcrumbs.about');
+            });
+
+        $this->get('breadcrumbs-about-test')
+            ->assertJson([
+                [
+                    'title' => 'About',
+                    'url'   => 'http://localhost/breadcrumbs-about-test',
+                ],
+            ]);
+    }
 }

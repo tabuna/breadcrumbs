@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tabuna\Breadcrumbs;
 
+use Illuminate\Support\Facades\Route;
 use JsonSerializable;
 
 class Crumb implements JsonSerializable
@@ -63,6 +64,6 @@ class Crumb implements JsonSerializable
      */
     public function url(): ?string
     {
-        return $this->url;
+        return Route::has($this->url) ? route($this->url) : $this->url;
     }
 }
