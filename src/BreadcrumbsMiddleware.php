@@ -8,8 +8,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Routing\Router;
-use Opis\Closure\SerializableClosure;
-use function Opis\Closure\unserialize;
+use Laravel\SerializableClosure\SerializableClosure;
 
 class BreadcrumbsMiddleware
 {
@@ -55,19 +54,8 @@ class BreadcrumbsMiddleware
             ->each(function (Route $route) {
                 $serialize = $route->defaults[self::class];
 
-                // Check if a security provider was set
-                if (null !== $securityProvider = SerializableClosure::getSecurityProvider()) {
-                    // Don't worry about it, our closure will be executed locally
-                    SerializableClosure::removeSecurityProvider();
-                }
-
-                /** @var \Opis\Closure\SerializableClosure $callback */
+                /** @var SerializableClosure $callback */
                 $callback = unserialize($serialize);
-
-                // Restore the security provider, if any
-                if ($securityProvider !== null) {
-                    SerializableClosure::addSecurityProvider($securityProvider);
-                }
 
                 if (is_a($callback, SerializableClosure::class)) {
                     $callback = $callback->getClosure();
