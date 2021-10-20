@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Tabuna\Breadcrumbs;
 
+use Closure;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-use function Opis\Closure\serialize;
+use Laravel\SerializableClosure\SerializableClosure;
 
 class BreadcrumbsServiceProvider extends ServiceProvider
 {
@@ -37,9 +38,10 @@ class BreadcrumbsServiceProvider extends ServiceProvider
             return;
         }
 
-        Route::macro('breadcrumbs', function (callable $closure) {
+        Route::macro('breadcrumbs', function (Closure $closure) {
+            /** @var Route $this */
             $this->middleware('breadcrumbs')
-                ->defaults(BreadcrumbsMiddleware::class, serialize($closure));
+                ->defaults(BreadcrumbsMiddleware::class, serialize(new SerializableClosure($closure)));
 
             return $this;
         });
