@@ -17,6 +17,7 @@
         }
     ],
     "require": {
+        "php": "^7.4|^8.0",
         "ext-json": "*",
         "laravel/framework": "^8.16",
         "laravel/serializable-closure": "^1.0"
