@@ -57,11 +57,7 @@ class BreadcrumbsMiddleware
                 /** @var SerializableClosure $callback */
                 $callback = unserialize($serialize);
 
-                if (is_a($callback, SerializableClosure::class)) {
-                    $callback = $callback->getClosure();
-                }
-
-                $this->breadcrumbs->for($route->getName(), $callback);
+                $this->breadcrumbs->for($route->getName(), $callback->getClosure());
             });
 
         optional($request->route())->forgetParameter(self::class);
