@@ -17,15 +17,15 @@
         }
     ],
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^8.0",
         "ext-json": "*",
-        "laravel/framework": "^8.16",
+        "laravel/framework": "^9.0",
         "laravel/serializable-closure": "^1.0"
     },
     "require-dev": {
-        "orchestra/testbench": "~6.0",
-        "phpunit/php-code-coverage": "^9.0",
-        "phpunit/phpunit": "^9.4"
+        "orchestra/testbench": "^7.0",
+        "phpunit/php-code-coverage": "^9.2",
+        "phpunit/phpunit": "^9.5.10"
     },
     "conflict": {
         "mockery/mockery": "<1.4.2",
