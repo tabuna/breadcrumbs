@@ -17,13 +17,13 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "ext-json": "*",
-        "laravel/framework": "^9.0",
+        "laravel/framework": "^10.0",
         "laravel/serializable-closure": "^1.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^7.0",
+        "orchestra/testbench": "^8.0",
         "phpunit/php-code-coverage": "^9.2",
         "phpunit/phpunit": "^9.5.10"
     },
