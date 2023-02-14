@@ -19,7 +19,7 @@
     "require": {
         "php": "^8.0",
         "ext-json": "*",
-        "laravel/framework": "^9.0",
+        "laravel/framework": "^9.0 || ^10.0",
         "laravel/serializable-closure": "^1.0"
     },
     "require-dev": {
