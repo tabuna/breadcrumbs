@@ -18,6 +18,7 @@ jobs:
         include:
           - laravel: 10.*
             testbench: 8.*
+            phpunit-options: '--no-coverage'
           - laravel: 11.*
             testbench: 9.*
         exclude:
@@ -49,7 +50,7 @@ jobs:
           composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
 
       - name: Execute tests
-        run: vendor/bin/phpunit
+        run: vendor/bin/phpunit ${{ matrix.phpunit-options }}
 
       - name: Codecov
         uses: codecov/codecov-action@v1.0.5
