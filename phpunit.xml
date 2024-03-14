@@ -25,9 +25,4 @@
         <env name="QUEUE_DRIVER" value="sync"/>
     </php>
     <logging/>
-    <source>
-        <include>
-            <directory suffix=".php">./src</directory>
-        </include>
-    </source>
 </phpunit>
