@@ -27,7 +27,7 @@
         "phpunit/php-code-coverage": "^10.0|^11.0"
     },
     "conflict": {
-        "phpunit/php-code-coverage": ">10.1"
+        "phpunit/php-code-coverage": ">=10.1"
     },
     "autoload": {
         "psr-4": {
