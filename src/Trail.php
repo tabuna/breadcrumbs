@@ -148,7 +148,7 @@ class Trail
      *
      * @return Trail
      */
-    public function push(string $title, string $url = null): self
+    public function push(string $title, ?string $url = null): self
     {
         $this->breadcrumbs->push(new Crumb($title, $url));
 

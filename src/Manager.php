@@ -84,7 +84,7 @@ class Manager
      *
      * @return bool
      */
-    public function has(string $name = null): bool
+    public function has(?string $name = null): bool
     {
         $name = $name ?? Route::currentRouteName();
 
