@@ -24,7 +24,7 @@ This package for the [Laravel framework](https://laravel.com/) will make it easy
 
 Run this at the command line:
 ```php
-$ composer require tabuna/breadcrumbs
+composer require tabuna/breadcrumbs
 ```
 
 This will update `composer.json` and install the package into the `vendor/` directory.
