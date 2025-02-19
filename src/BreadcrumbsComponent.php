@@ -10,65 +10,29 @@ use Illuminate\View\Component;
 class BreadcrumbsComponent extends Component
 {
     /**
-     * @var Manager
-     */
-    public $breadcrumbs;
-
-    /**
-     * @var string|null
-     */
-    public $route;
-
-    /**
-     * @var mixed|null
-     */
-    public $parameters;
-
-    /**
-     * @var string|null
-     */
-    public $class;
-
-    /**
-     * @var string|null
-     */
-    public $active;
-
-    /**
      * Create a new component instance.
-     *
-     * @param Manager     $manager
-     * @param string|null $route
-     * @param mixed|null  $parameters
-     * @param string|null $class
-     * @param string|null $active
      */
     public function __construct(
-        Manager $manager,
-        string $route = null,
-        $parameters = null,
-        string $class = null,
-        string $active = null
-    )
-    {
-        $this->breadcrumbs = $manager;
-        $this->route = $route;
-        $this->parameters = $parameters;
-        $this->class = $class;
-        $this->active = $active;
-    }
+        public Manager $manager,
+        public ?string $route = null,
+        public $parameters = null,
+        public ?string $class = null,
+        public ?string $active = null,
+        public bool $escape = true,
+    ) {}
 
     /**
-     * @return Collection
      * @throws \Throwable
+     *
+     * @return Collection
      */
     public function generate(): Collection
     {
         if ($this->route !== null) {
-            return $this->breadcrumbs->generate($this->route, $this->parameters);
+            return $this->manager->generate($this->route, $this->parameters);
         }
 
-        return $this->breadcrumbs->current($this->parameters);
+        return $this->manager->current($this->parameters);
     }
 
     /**
@@ -78,7 +42,7 @@ class BreadcrumbsComponent extends Component
      */
     public function shouldRender(): bool
     {
-        return $this->breadcrumbs->has($this->route);
+        return $this->manager->has($this->route);
     }
 
     /**
@@ -89,5 +53,17 @@ class BreadcrumbsComponent extends Component
     public function render()
     {
         return view('breadcrumbs::breadcrumbs');
+    }
+
+    /**
+     * @param Crumb $crumb
+     *
+     * @return string|null
+     */
+    public function title(Crumb $crumb): ?string
+    {
+        $title = $crumb->title();
+
+        return $this->escape ? e($title) : $title;
     }
 }
