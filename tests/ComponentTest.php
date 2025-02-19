@@ -37,6 +37,19 @@ class ComponentTest extends TestCase
             ->assertSee('value 3');
     }
 
+    public function testEscapedHtmlIsRenderedAsText(): void
+    {
+        $this->getComponent('escaped')
+            ->assertSee('<strong>Important Notice</strong>')
+            ->assertDontSee('<strong>Important Notice</strong>', false);
+    }
+
+    public function testUnescapedHtmlIsRenderedAsHtml(): void
+    {
+        $this->getComponent('unescaped')
+            ->assertSee('<strong>Important Notice</strong>', false);
+    }
+
     /**
      * @param string $template
      *
@@ -59,7 +72,8 @@ class ComponentTest extends TestCase
                 return $trail
                     ->push('Home')
                     ->push('Arguments', $value)
-                    ->push('Arguments2', $value2);
+                    ->push('Arguments2', $value2)
+                    ->push('<strong>Important Notice</strong>');
             });
 
         return $this->get("component/$template");
