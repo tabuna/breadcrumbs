@@ -21,9 +21,9 @@ class Registrar
      *
      * @param string $name
      *
-     * @return \Closure
      * @throws \Throwable
      *
+     * @return \Closure
      */
     public function get(string $name): Closure
     {
@@ -52,9 +52,9 @@ class Registrar
      * @param string   $name
      * @param \Closure $definition
      *
-     * @return void
      * @throws \Throwable
      *
+     * @return void
      */
     public function set(string $name, Closure $definition): void
     {

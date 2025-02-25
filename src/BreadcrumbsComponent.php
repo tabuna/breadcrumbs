@@ -10,31 +10,6 @@ use Illuminate\View\Component;
 class BreadcrumbsComponent extends Component
 {
     /**
-     * @var Manager
-     */
-    public $breadcrumbs;
-
-    /**
-     * @var string|null
-     */
-    public $route;
-
-    /**
-     * @var mixed|null
-     */
-    public $parameters;
-
-    /**
-     * @var string|null
-     */
-    public $class;
-
-    /**
-     * @var string|null
-     */
-    public $active;
-
-    /**
      * Create a new component instance.
      *
      * @param Manager     $manager
@@ -44,19 +19,12 @@ class BreadcrumbsComponent extends Component
      * @param string|null $active
      */
     public function __construct(
-        Manager $manager,
-        string $route = null,
-        $parameters = null,
-        string $class = null,
-        string $active = null
-    )
-    {
-        $this->breadcrumbs = $manager;
-        $this->route = $route;
-        $this->parameters = $parameters;
-        $this->class = $class;
-        $this->active = $active;
-    }
+        public Manager $manager,
+        public ?string $route = null,
+        public $parameters = null,
+        public ?string $class = null,
+        public ?string $active = null
+    ) {}
 
     /**
      * @return Collection
@@ -65,10 +33,10 @@ class BreadcrumbsComponent extends Component
     public function generate(): Collection
     {
         if ($this->route !== null) {
-            return $this->breadcrumbs->generate($this->route, $this->parameters);
+            return $this->manager->generate($this->route, $this->parameters);
         }
 
-        return $this->breadcrumbs->current($this->parameters);
+        return $this->manager->current($this->parameters);
     }
 
     /**
@@ -78,7 +46,7 @@ class BreadcrumbsComponent extends Component
      */
     public function shouldRender(): bool
     {
-        return $this->breadcrumbs->has($this->route);
+        return $this->manager->has($this->route);
     }
 
     /**

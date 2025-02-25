@@ -98,10 +98,8 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application events.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         require base_path('routes/breadcrumbs.php');
     }
@@ -145,10 +143,8 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         Breadcrumbs::for('photos.index', fn (Trail $trail) =>
              $trail->push('Photos', route('home'))

@@ -38,9 +38,9 @@ class BreadcrumbsMiddleware
      * @param Request $request
      * @param Closure $next
      *
-     * @return mixed
      * @throws \Throwable
      *
+     * @return mixed
      */
     public function handle(Request $request, Closure $next)
     {
@@ -49,7 +49,7 @@ class BreadcrumbsMiddleware
                 return array_key_exists(self::class, $route->defaults);
             })
             ->filter(function (Route $route) {
-                return !$this->breadcrumbs->has($route->getName());
+                return ! $this->breadcrumbs->has($route->getName());
             })
             ->each(function (Route $route) {
                 $serialize = $route->defaults[self::class];

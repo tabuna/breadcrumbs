@@ -28,7 +28,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(Manager::class);
-        $this->loadViewsFrom(__DIR__ . '/../views', 'breadcrumbs');
+        $this->loadViewsFrom(__DIR__.'/../views', 'breadcrumbs');
 
         \Illuminate\Support\Facades\Route::middlewareGroup('breadcrumbs', [
             BreadcrumbsMiddleware::class,

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Tabuna\Breadcrumbs\Tests;
 
 use Illuminate\Support\Facades\Route;
@@ -9,7 +8,6 @@ use Tabuna\Breadcrumbs\Trail;
 
 class ComponentTest extends TestCase
 {
-
     public function testSimple(): void
     {
         $this->getComponent('simple')->assertSee('Home');
@@ -44,8 +42,7 @@ class ComponentTest extends TestCase
      */
     protected function getComponent(string $template): TestResponse
     {
-        Route::get('static', function (string $view) {
-        })
+        Route::get('static', fn () => '')
             ->name('static')
             ->breadcrumbs(function (Trail $trail) {
                 return $trail->push('Static Page');
