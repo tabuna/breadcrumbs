@@ -27,8 +27,9 @@ class BreadcrumbsComponent extends Component
     ) {}
 
     /**
-     * @return Collection
      * @throws \Throwable
+     *
+     * @return Collection
      */
     public function generate(): Collection
     {
