@@ -39,9 +39,9 @@ class Manager
      * @param string   $route
      * @param \Closure $definition
      *
-     * @return void
      * @throws \Throwable
      *
+     * @return void
      */
     public function for(string $route, Closure $definition)
     {
@@ -51,8 +51,9 @@ class Manager
     /**
      * @param null $parameters
      *
-     * @return Collection
      * @throws \Throwable
+     *
+     * @return Collection
      */
     public function current($parameters = null): Collection
     {
@@ -66,11 +67,12 @@ class Manager
     }
 
     /**
-     * @param string $route
+     * @param string     $route
      * @param mixed|null $parameters
      *
-     * @return Collection
      * @throws \Throwable
+     *
+     * @return Collection
      */
     public function generate(string $route, $parameters = null): Collection
     {

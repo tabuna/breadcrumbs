@@ -43,8 +43,7 @@ class BreadcrumbsTest extends TestCase
     public function testBreadcrumbsParent(): void
     {
 
-        Route::get('/', function () {
-        })
+        Route::get('/', function () {})
             ->name('home')
             ->breadcrumbs(function (Trail $trail) {
                 $trail->push('Home', route('home'));
@@ -209,7 +208,6 @@ class BreadcrumbsTest extends TestCase
             return Breadcrumbs::current()->toJson();
         })->name('breadcrumbs-home');
 
-
         Breadcrumbs::for('breadcrumbs-home', function (Trail $trail) {
             return $trail->push('Home', 'http://localhost/');
         });
@@ -225,7 +223,7 @@ class BreadcrumbsTest extends TestCase
 
     public function testBreadcrumbsTimesOne(): void
     {
-        $log = storage_path() . '/logs/laravel.log';
+        $log = storage_path().'/logs/laravel.log';
 
         file_put_contents($log, '');
 

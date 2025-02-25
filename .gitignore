@@ -6,3 +6,4 @@ vendor
 .DS_Store
 .lock
 .phpunit.result.cache
+.phpunit.cache

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tabuna\Breadcrumbs\Tests;
 
 use Orchestra\Testbench\TestCase as BaseCase;
-use Tabuna\Breadcrumbs\BreadcrumbsServiceProvider;
 use Tabuna\Breadcrumbs\Breadcrumbs;
+use Tabuna\Breadcrumbs\BreadcrumbsServiceProvider;
 
 class TestCase extends BaseCase
 {
@@ -19,7 +19,7 @@ class TestCase extends BaseCase
     {
         return [
             BreadcrumbsServiceProvider::class,
-            TestServiceProvider::class
+            TestServiceProvider::class,
         ];
     }
 

@@ -1,0 +1,79 @@
+name: Quality Assurance
+
+on:
+  push: # (or pull requests)
+    paths:
+      - '.github/workflows/**'
+      - '**.php'
+      - 'psalm.xml.dist'
+      - 'composer.json'
+
+jobs:
+  composer:
+    name: composer
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP 🔧
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+          coverage: none
+          tools: composer:v2
+
+      - name: Validate composer.json and composer.lock 👀
+        run: composer validate
+
+      - name: Install dependencies
+        run: composer install --no-progress --no-suggest
+
+      - name: Check for outdated dependencies
+        run: |
+          if [ -n "$(composer outdated --direct --no-dev)" ]; then
+            echo "❌ There are outdated dependencies!"
+            composer outdated --direct
+            exit 1
+          fi
+        shell: bash
+
+  psalm:
+    name: psalm
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP 🔧
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+          coverage: none
+          tools: composer:v2
+
+      - name: Install Dependencies 🔧
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+      - name: Run psalm
+        run: vendor/bin/psalm --output-format=github
+
+  phploc:
+    name: phploc
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP 🔧
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+          coverage: none
+          tools: composer:v2
+
+      - name: Download phploc 🔧
+        run: wget https://phar.phpunit.de/phploc.phar
+
+      - name: Run phploc
+        run: php phploc.phar src/

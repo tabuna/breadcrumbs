@@ -15,6 +15,6 @@ class TestServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->loadViewsFrom(__DIR__ . '/views', 'test_breadcrumbs');
+        $this->loadViewsFrom(__DIR__.'/views', 'test_breadcrumbs');
     }
 }

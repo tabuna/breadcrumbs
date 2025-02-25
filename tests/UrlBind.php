@@ -8,7 +8,6 @@ use Illuminate\Contracts\Routing\UrlRoutable;
 
 class UrlBind implements UrlRoutable
 {
-
     public function getRouteKey()
     {
         return 'bind';
@@ -21,7 +20,7 @@ class UrlBind implements UrlRoutable
 
     public function resolveRouteBinding($value, $field = null)
     {
-        return  $value + $value;
+        return $value + $value;
     }
 
     public function resolveChildRouteBinding($childType, $value, $field)

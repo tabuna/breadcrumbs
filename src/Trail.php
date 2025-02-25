@@ -13,20 +13,6 @@ use Illuminate\Support\Facades\Route;
 class Trail
 {
     /**
-     * The router.
-     *
-     * @var Registrar
-     */
-    protected $router;
-
-    /**
-     * The breadcrumb registrar.
-     *
-     * @var Registrar
-     */
-    protected $registrar;
-
-    /**
      * The breadcrumb trail.
      *
      * @var Collection
@@ -39,10 +25,10 @@ class Trail
      * @param Router    $router
      * @param Registrar $registrar
      */
-    public function __construct(Router $router, Registrar $registrar)
-    {
-        $this->router = $router;
-        $this->registrar = $registrar;
+    public function __construct(
+        protected Router $router,
+        protected Registrar $registrar
+    ) {
         $this->breadcrumbs = new Collection;
     }
 
@@ -52,11 +38,11 @@ class Trail
      * @param string  $name
      * @param Closure $definition
      *
-     * @return void
      * @throws \Throwable
      *
+     * @return void
      */
-    public function register(string $name, Closure $definition)
+    public function register(string $name, Closure $definition): void
     {
         $this->registrar->set($name, $definition);
     }
@@ -67,8 +53,9 @@ class Trail
      * @param string $route
      * @param array  $parameters
      *
-     * @return Collection
      * @throws \Throwable
+     *
+     * @return Collection
      */
     public function generate(string $route, array $parameters = []): Collection
     {
@@ -93,7 +80,7 @@ class Trail
      */
     private function getRouteByNameParameters(string $name, array $parameters): array
     {
-        if (!empty($parameters)) {
+        if (! empty($parameters)) {
             return $parameters;
         }
 
@@ -110,11 +97,11 @@ class Trail
      * @param string $name
      * @param array  $parameters
      *
-     * @return void
      * @throws \Throwable
      *
+     * @return void
      */
-    protected function call(string $name, array $parameters)
+    protected function call(string $name, array $parameters): void
     {
         $definition = $this->registrar->get($name);
 
@@ -129,9 +116,9 @@ class Trail
      * @param string $name
      * @param mixed  $parameters
      *
-     * @return Trail
      * @throws \Throwable
      *
+     * @return Trail
      */
     public function parent(string $name, ...$parameters): self
     {
