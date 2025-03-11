@@ -57,6 +57,10 @@ class BreadcrumbsMiddleware
                 /** @var SerializableClosure $callback */
                 $callback = unserialize($serialize);
 
+                if ($route->getName() === null) {
+                    return;
+                }
+
                 $this->breadcrumbs->for($route->getName(), $callback->getClosure());
             });
 
