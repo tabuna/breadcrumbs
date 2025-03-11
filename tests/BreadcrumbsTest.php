@@ -197,6 +197,32 @@ class BreadcrumbsTest extends TestCase
         ]);
     }
 
+    public function testBreadcrumbsOverwriteWithNull(): void
+    {
+        $domains = [
+            '127.0.0.1',
+            'localhost',
+            'foo.com',
+            'bar.com',
+        ];
+
+        foreach ($domains as $domain) {
+            Route::domain($domain)
+                ->get('/overwrite', function () {
+                    return response()->json([
+                        'exist' => Breadcrumbs::has(),
+                    ]);
+                })
+                ->breadcrumbs(function (Trail $trail) {
+                    return $trail->push('overwrite');
+                });
+        }
+
+        $this->get('/overwrite')->assertJson([
+            'exist' => false,
+        ]);
+    }
+
     public function testBreadcrumbsCacheDefined(): void
     {
         Route::get('/breadcrumbs-home', function () {
