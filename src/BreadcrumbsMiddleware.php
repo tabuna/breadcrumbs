@@ -52,7 +52,7 @@ class BreadcrumbsMiddleware
                 return $route->getName() !== null;
             })
             ->filter(function (Route $route) {
-                return !$this->breadcrumbs->has($route->getName());
+                return ! $this->breadcrumbs->has($route->getName());
             })
             ->each(function (Route $route) {
                 $serialize = $route->defaults[self::class];
