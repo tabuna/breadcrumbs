@@ -51,12 +51,12 @@ Route::get('/about', fn () => view('home'))
 );
 ```
 
-You can also get arguments from the request:
+You may also retrieve arguments from the request. Parameters are resolved by name:
 
 ```php
-Route::get('/category/{category}', function (Category $category){
-    //In this example, the category object is your Eloquent model.
-    //code...
+Route::get('/category/{category}', function (Category $category) {
+    // In this example, $category is an Eloquent model instance.
+    // ...
 })
     ->name('category')
     ->breadcrumbs(fn (Trail $trail, Category $category) =>
@@ -182,7 +182,11 @@ You can also pass parameters:
 
 ```blade
 <x-tabuna-breadcrumbs
-    parameters="['value 1', 'value 2', 'value 3']"
+    :parameters="[
+        'foo' => 'Dashboard',
+        'baz' => 'Users',
+        'buzz' => 'Edit Profile'
+    ]"
 />
 ```
 
