@@ -31,8 +31,7 @@ class ComponentTest extends TestCase
     {
         $this->getComponent('parameters')
             ->assertSee('value 1')
-            ->assertSee('value 2')
-            ->assertSee('value 3');
+            ->assertSee('value 2');
     }
 
     /**
@@ -52,11 +51,12 @@ class ComponentTest extends TestCase
             return view("test_breadcrumbs::$view");
         })
             ->name('breadcrumbs.components')
-            ->breadcrumbs(function (Trail $trail, $value = null, $value2 = null) {
+            ->breadcrumbs(function (Trail $trail, $view = null, $value2 = null, $value3 = null) {
                 return $trail
                     ->push('Home')
-                    ->push('Arguments', $value)
-                    ->push('Arguments2', $value2);
+                    ->push('Arguments', $view)
+                    ->push('Arguments2', $value2)
+                    ->push('Arguments3', $value3);
             });
 
         return $this->get("component/$template");

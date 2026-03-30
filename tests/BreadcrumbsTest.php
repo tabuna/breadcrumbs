@@ -113,9 +113,30 @@ class BreadcrumbsTest extends TestCase
             ]);
     }
 
+    public function testBreadcrumbsNamedParameters(): void
+    {
+        $random = random_int(10, 100);
+
+        Route::get('breadcrumbs-named-test/{category}/{post}', function () {
+            return Breadcrumbs::current()->toJson();
+        })
+            ->name('breadcrumbs.named')
+            ->breadcrumbs(function (Trail $trail, $post) {
+                return $trail->push('Post', $post);
+            });
+
+        $this->get(\route('breadcrumbs.named', ['category' => 'foo', 'post' => $random]))
+            ->assertJson([
+                [
+                    'title' => 'Post',
+                    'url'   => (string) $random,
+                ],
+            ]);
+    }
+
     public function testBreadcrumbsParamsForCurrent(): void
     {
-        $params = ['value 1', 'value 2', 'value 3'];
+        $params = ['value' => 'value 1', 'value2' => 'value 2', 'value3' => 'value 3'];
 
         Route::get('breadcrumbs-about-test', function (UrlBind $bind) use ($params) {
             $bind->getRouteKey();
@@ -135,15 +156,15 @@ class BreadcrumbsTest extends TestCase
             ->assertJson([
                 [
                     'title' => 'Arguments',
-                    'url'   => $params[0],
+                    'url'   => 'value 1',
                 ],
                 [
                     'title' => 'Arguments2',
-                    'url'   => $params[1],
+                    'url'   => 'value 2',
                 ],
                 [
                     'title' => 'Arguments3',
-                    'url'   => $params[2],
+                    'url'   => 'value 3',
                 ],
             ]);
     }
@@ -316,6 +337,47 @@ class BreadcrumbsTest extends TestCase
                 [
                     'title' => 'About',
                     'url'   => 'http://localhost/breadcrumbs-about-test',
+                ],
+            ]);
+    }
+
+    public function testBreadcrumbsPrefixRoute(): void
+    {
+        $params = ['bind' => 1, 'value2' => 2, 'value3' => 3];
+
+        Route::group([
+            'prefix' => 'beneficios',
+            'as' => 'benefits.',
+        ], function () use ($params) {
+            Route::prefix('/{bind}/test/')
+                ->get('breadcrumbs-about-test', function (UrlBind $bind) use ($params) {
+                    $bind->getRouteKey();
+
+                    return Breadcrumbs::current($params)->toJson();
+                })
+                ->middleware(SubstituteBindings::class)
+                ->name('breadcrumbs.about')
+                ->breadcrumbs(function (Trail $trail, $bind, $value2, $value3) {
+                    return $trail
+                        ->push('Arguments', $bind)
+                        ->push('Arguments2', $value2)
+                        ->push('Arguments3', $value3);
+                });
+        });
+
+        $this->get(\route('benefits.breadcrumbs.about', $params))
+            ->assertJson([
+                [
+                    'title' => 'Arguments',
+                    'url'   => $params['bind'],
+                ],
+                [
+                    'title' => 'Arguments2',
+                    'url'   => $params['value2'],
+                ],
+                [
+                    'title' => 'Arguments3',
+                    'url'   => $params['value3'],
                 ],
             ]);
     }

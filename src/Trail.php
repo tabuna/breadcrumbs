@@ -6,7 +6,6 @@ namespace Tabuna\Breadcrumbs;
 
 use Closure;
 use Illuminate\Contracts\Routing\Registrar as Router;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 
@@ -105,9 +104,7 @@ class Trail
     {
         $definition = $this->registrar->get($name);
 
-        $parameters = Arr::prepend(array_values($parameters), $this);
-
-        call_user_func_array($definition, $parameters);
+        app()->call($definition, array_merge($parameters, [Trail::class => $this]));
     }
 
     /**

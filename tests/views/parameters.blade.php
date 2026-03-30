@@ -1,3 +1,3 @@
 <x-tabuna-breadcrumbs
-    parameters="['value 1', 'value 2', 'value 3']"
+    :parameters="['view' => 'value 1', 'value2' => 'value 2', 'value3' => 'value 3']"
 />
