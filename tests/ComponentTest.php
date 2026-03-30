@@ -34,6 +34,15 @@ class ComponentTest extends TestCase
             ->assertSee('value 2');
     }
 
+    public function testBladeComponentIsRegistered(): void
+    {
+        $compiler = app('blade.compiler');
+        $reflection = new \ReflectionProperty($compiler, 'classComponentAliases');
+        $reflection->setAccessible(true);
+
+        $this->assertArrayHasKey('tabuna-breadcrumbs', $reflection->getValue($compiler));
+    }
+
     /**
      * @param string $template
      *

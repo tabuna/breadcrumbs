@@ -7,7 +7,10 @@ namespace Tabuna\Breadcrumbs\Tests;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
+use Tabuna\Breadcrumbs\BreadcrumbsMiddleware;
+use Tabuna\Breadcrumbs\BreadcrumbsServiceProvider;
 use Tabuna\Breadcrumbs\Breadcrumbs;
+use Tabuna\Breadcrumbs\Registrar;
 use Tabuna\Breadcrumbs\Trail;
 
 class BreadcrumbsTest extends TestCase
@@ -380,5 +383,83 @@ class BreadcrumbsTest extends TestCase
                     'url'   => $params['value3'],
                 ],
             ]);
+    }
+
+    public function testBreadcrumbsMacroChaining(): void
+    {
+        Route::get('/chain', fn () => Breadcrumbs::current()->toJson())
+            ->breadcrumbs(fn (Trail $trail) => $trail->push('Chain'))
+            ->name('breadcrumbs.chain');
+
+        $this->get('/chain')->assertJson([['title' => 'Chain']]);
+    }
+
+    public function testBreadcrumbsHasForExplicitRouteWhenOnDifferentRoute(): void
+    {
+        Breadcrumbs::for('breadcrumbs.explicit', fn (Trail $trail) => $trail->push('Explicit'));
+
+        Route::get('/other-has', function () {
+            return response()->json(['has' => Breadcrumbs::has('breadcrumbs.explicit')]);
+        })->name('breadcrumbs.other-has');
+
+        $this->get('/other-has')->assertJson(['has' => true]);
+    }
+
+    public function testRegistrarThrowsForMissingDefinition(): void
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('No breadcrumbs defined for route [breadcrumbs.missing].');
+
+        (new Registrar())->get('breadcrumbs.missing');
+    }
+
+    public function testBreadcrumbsGenerateForOtherRouteDoesNotUseCurrentParams(): void
+    {
+        Breadcrumbs::for('breadcrumbs.other-params', function (Trail $trail, $id = null) {
+            $trail->push('Other', $id);
+        });
+
+        Route::get('/other-params-route/{id}', fn () => null)->name('breadcrumbs.other-params');
+
+        Route::get('/current-params-route/{id}', function () {
+            return Breadcrumbs::generate('breadcrumbs.other-params')->toJson();
+        })->name('breadcrumbs.current-params');
+
+        $this->get('/current-params-route/999')
+            ->assertJson([['title' => 'Other', 'url' => null]]);
+    }
+
+    public function testBreadcrumbsMacroNotOverwritten(): void
+    {
+        $macrosProperty = new \ReflectionProperty(\Illuminate\Routing\Route::class, 'macros');
+        $macrosProperty->setAccessible(true);
+        $originalMacros = $macrosProperty->getValue(null);
+
+        \Illuminate\Routing\Route::macro('breadcrumbs', fn () => 'custom-value');
+
+        (new BreadcrumbsServiceProvider(app()))->register();
+
+        $route = Route::get('/macro-overwrite-test', fn () => null);
+        $result = $route->breadcrumbs();
+
+        $macrosProperty->setValue(null, $originalMacros);
+
+        $this->assertEquals('custom-value', $result);
+    }
+
+    public function testBreadcrumbsMiddlewareParameterIsForgotten(): void
+    {
+        Route::get('/forget-param/{name}', function () {
+            return response()->json([
+                'has_key' => array_key_exists(
+                    BreadcrumbsMiddleware::class,
+                    Route::current()->parameters()
+                ),
+            ]);
+        })
+            ->name('breadcrumbs.forget-param')
+            ->breadcrumbs(fn (Trail $trail, string $name) => $trail->push($name));
+
+        $this->get('/forget-param/test')->assertJson(['has_key' => false]);
     }
 }

@@ -100,7 +100,7 @@ class Trail
      *
      * @return void
      */
-    protected function call(string $name, array $parameters): void
+    private function call(string $name, array $parameters): void
     {
         $definition = $this->registrar->get($name);
 
